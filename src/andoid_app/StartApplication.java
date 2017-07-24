@@ -19,16 +19,16 @@ public class StartApplication {
 
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-			capabilities.setCapability("deviceName", "410a14886232c000");
-			capabilities.setCapability("platformVersion", "4.2.2");
+			capabilities.setCapability("deviceName", ""); // device UID from adb
+			capabilities.setCapability("platformVersion", ""); // android version
 			capabilities.setCapability("platformName", "Android");
 			capabilities.setCapability("app", app.getAbsolutePath());
-			capabilities.setCapability("appPackage", "com.code44.finance");
-			capabilities.setCapability("appWaitActivity", "com.code44.finance.*");
+			capabilities.setCapability("appPackage", "com.code44.finance"); // package name
+			capabilities.setCapability("appWaitActivity", "com.code44.finance.*"); // default activity
 
 			driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-			Thread.sleep(10000);
+			Thread.sleep(100000);
 			driver.quit();
 
 	}
