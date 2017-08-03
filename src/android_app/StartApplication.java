@@ -1,4 +1,4 @@
-package andoid_app;
+package android_app;
 
 import io.appium.java_client.android.AndroidDriver;
 import java.io.File;
@@ -14,13 +14,13 @@ public class StartApplication {
 		public static void main(String[] args) throws MalformedURLException, InterruptedException {
 
 			File classpathRoot = new File(System.getProperty("user.dir"));
-			File appDir = new File(classpathRoot, "/Apps/");
+			File appDir = new File(classpathRoot, "/apps/");
 			File app = new File(appDir, "Financius.v0.18.2.apk");
 
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-			capabilities.setCapability("deviceName", ""); // device UID from adb
-			capabilities.setCapability("platformVersion", ""); // android version
+			capabilities.setCapability("deviceName", "27db13b8"); // device UID from adb
+			capabilities.setCapability("platformVersion", "6.0.1"); // android version
 			capabilities.setCapability("platformName", "Android");
 			capabilities.setCapability("app", app.getAbsolutePath());
 			capabilities.setCapability("appPackage", "com.code44.finance"); // package name
@@ -28,6 +28,7 @@ public class StartApplication {
 
 			driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+			driver.findElementById("com.code44.finance:id/accounts").click();
 			Thread.sleep(100000);
 			driver.quit();
 
