@@ -18,14 +18,16 @@ public class AndroidTest extends BaseDriver{
 	}
 	
     @Test
-    public void MenuOverview_01(){
+    public void MenuOverview(){
     	WebDriverWait wait = new WebDriverWait(driver, 10);
     	WebElement menuButton = driver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Otwórz lokalizację\"]"));
 
     	menuButton.click();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Podgląd\"]"))));
+
         WebElement overViewButton = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Podgląd\"]"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Konta\"]"))));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Transakje\"]"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Transakcje\"]"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Zestawienia\"]"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Ustawienia\"]"))));
         overViewButton.click();
@@ -52,7 +54,7 @@ public class AndroidTest extends BaseDriver{
     	WebDriverWait wait = new WebDriverWait(driver, 10);
     	WebElement menuButton = driver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Otwórz lokalizację\"]"));
         menuButton.click();
-        WebElement transactionsViewButton = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Transakje\"]"))));
+        WebElement transactionsViewButton = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text=\"Transakcje\"]"))));
         transactionsViewButton.click();
     }
     @Test

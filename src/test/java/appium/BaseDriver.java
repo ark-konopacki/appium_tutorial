@@ -16,11 +16,9 @@ import java.net.URL;
 
 public class BaseDriver {
     public AppiumDriver<WebElement> driver;
-    private static AppiumDriverLocalService service;
 
     @Before
     public void setUp() throws Exception {
-        
         File classpathRoot = new File(System.getProperty("user.dir"));
         File appDir = new File(classpathRoot, "/apps/");
         File app = new File(appDir.getCanonicalPath(), "Financius.v0.18.2.apk");
@@ -34,8 +32,8 @@ public class BaseDriver {
 		
 		capabilities.setCapability("no-reset", "true"); 
 		capabilities.setCapability("full-reset", "false"); 
-		
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+    
     }
 
     @After
@@ -43,9 +41,7 @@ public class BaseDriver {
         if (driver != null) {
             driver.quit();
         }
-        if (service != null) {
-            service.stop();
-        }
+        
     }
 
 
