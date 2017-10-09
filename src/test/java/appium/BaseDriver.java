@@ -11,11 +11,14 @@ import org.junit.Before;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+
 import java.io.File;
 import java.net.URL;
 
-public class BaseDriver {
+
+public class BaseDriver extends JUnitReporter{
     public AppiumDriver<WebElement> driver;
+    
 
     @Before
     public void setUp() throws Exception {
