@@ -1,19 +1,16 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant"
-	name="HelloProject" default="main" basedir=".">
+<project xmlns:ant="antlib:org.apache.ant"
+	name="Appium Tuttorial" default="main" basedir=".">
 	<description>
-		Running junit Test
+		Running jUnit Appium Test
 	</description>
 
 	<!-- Project Structure -->
-	<property name="jdk.version" value="1.8" />
-	<property name="projectName" value="Appium Tuttorial" />
 	<property name="src.dir" location="src" />
 	<property name="bin.dir" location="bin" />
-	<property name="test.dir" location="src" />
 	<property name="lib.dir" location="lib" />
 	<property name="report.dir" location="report" />
 
-	
+	<!-- Adding lib Jar's from ${lib.dir} -->
 	<target name="setClassPath">					
 			<path id="classpath_jars">						
 			<fileset dir="${lib.dir}">
@@ -23,9 +20,7 @@
 	</target>		
 
 	<!-- Compile Java source from ${src.dir} -->
-	<target name="compile" depends="clean, init, setClassPath" description="compile source code">
-		<echo message="classpath:${test.classpath}"/>					
-			<echo message="compiling.........."/>						
+	<target name="compile" depends="clean, init, setClassPath" description="compile source code">				
 		<javac destdir="${bin.dir}" debug="true" includeantruntime="false" >
 			<classpath refid="classpath_jars"/>
 			<src path="${src.dir}" />
@@ -34,8 +29,6 @@
 
 	<!-- Run jUnit -->
 	<target name="junit" depends="compile">
-				 
-		
 	  <junit printsummary="yes" haltonfailure="no">
 	  	<classpath>
 	  		<pathelement location="${bin.dir}" />
@@ -44,7 +37,6 @@
 		            <include name="**/*.jar" />
 	            </fileset>
 	  	</classpath>
-	  	
 		<formatter type="xml" />
 		<batchtest>
 	       <fileset dir="${src.dir}">
