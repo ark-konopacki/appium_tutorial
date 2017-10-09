@@ -1,0 +1,73 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant"
+	name="HelloProject" default="main" basedir=".">
+	<description>
+		Running junit Test
+	</description>
+
+	<!-- Project Structure -->
+	<property name="jdk.version" value="1.8" />
+	<property name="projectName" value="Appium Tuttorial" />
+	<property name="src.dir" location="src" />
+	<property name="bin.dir" location="bin" />
+	<property name="test.dir" location="src" />
+	<property name="lib.dir" location="lib" />
+	<property name="report.dir" location="report" />
+
+	
+	<target name="setClassPath">					
+			<path id="classpath_jars">						
+			<fileset dir="${lib.dir}">
+            	<include name="**/*.jar" />
+        	</fileset>
+        	</path>	
+	</target>		
+
+	<!-- Compile Java source from ${src.dir} -->
+	<target name="compile" depends="clean, init, setClassPath" description="compile source code">
+		<echo message="classpath:${test.classpath}"/>					
+			<echo message="compiling.........."/>						
+		<javac destdir="${bin.dir}" debug="true" includeantruntime="false" >
+			<classpath refid="classpath_jars"/>
+			<src path="${src.dir}" />
+		</javac>
+	</target>
+
+	<!-- Run jUnit -->
+	<target name="junit" depends="compile">
+				 
+		
+	  <junit printsummary="yes" haltonfailure="no">
+	  	<classpath>
+	  		<pathelement location="${bin.dir}" />
+	  		<pathelement location="${lib.dir}" />
+	  			<fileset dir="${lib.dir}">
+		            <include name="**/*.jar" />
+	            </fileset>
+	  	</classpath>
+	  	
+		<formatter type="xml" />
+		<batchtest>
+	       <fileset dir="${src.dir}">
+		            <include name="**/*Test*" />
+	       </fileset>
+		</batchtest>
+	  	<formatter type="brief" usefile="false"/>
+	  </junit>
+	</target>
+
+	<!-- Create folders -->
+	<target name="init">
+		<mkdir dir="${src.dir}" />
+		<mkdir dir="${bin.dir}" />
+		<mkdir dir="${report.dir}" />
+	</target>
+
+	<!-- Delete folders -->
+	<target name="clean" description="clean up">
+		<delete dir="${bin.dir}" />
+		<delete dir="${report.dir}" />
+	</target>
+
+	<target name="main" depends="junit" />
+
+</project>
